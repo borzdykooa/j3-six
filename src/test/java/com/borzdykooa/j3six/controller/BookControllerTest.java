@@ -27,12 +27,13 @@ public class BookControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
     private ObjectMapper objectMapper;
+
     private BookRequestDto bookRequestDto;
 
     @Before
     public void init() {
-        objectMapper = new ObjectMapper();
         bookRequestDto = new BookRequestDto();
     }
 

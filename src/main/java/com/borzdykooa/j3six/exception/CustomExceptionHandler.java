@@ -8,22 +8,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
+@ResponseBody
 public class CustomExceptionHandler {
 
     @ExceptionHandler(ApplicationException.class)
-    @ResponseBody
     public ResponseEntity<String> handleApplicationException(ApplicationException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseBody
     public ResponseEntity<String> handleValidationException() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Spring validation failed");
     }
 
     @ExceptionHandler(Throwable.class)
-    @ResponseBody
     public ResponseEntity<String> handleUnexpectedExceptions(Throwable throwable) {
         StackTraceElement[] stackTrace = throwable.getStackTrace();
         StringBuilder stringBuilder = new StringBuilder(throwable.getMessage());
@@ -32,6 +30,6 @@ public class CustomExceptionHandler {
             stringBuilder.append(System.lineSeparator());
         }
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(stringBuilder.toString());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(stringBuilder.toString());
     }
 }

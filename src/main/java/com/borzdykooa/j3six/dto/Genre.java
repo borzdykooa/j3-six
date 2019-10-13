@@ -3,6 +3,8 @@ package com.borzdykooa.j3six.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 @AllArgsConstructor
 public enum Genre {
@@ -13,11 +15,9 @@ public enum Genre {
     private String value;
 
     public static Genre getByValue(String value) {
-        for (Genre genre : Genre.values()) {
-            if (value.equalsIgnoreCase(genre.value)) {
-                return genre;
-            }
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(genre -> genre.value.equals(value))
+                .findFirst()
+                .orElse(null);
     }
 }

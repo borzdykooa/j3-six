@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BookService {
 
     private final BookRepository bookRepository;
